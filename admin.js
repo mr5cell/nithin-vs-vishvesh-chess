@@ -1,13 +1,78 @@
 // Admin panel functionality
+const ADMIN_PIN = '15081947';
+const AUTH_KEY = 'chessAdminAuth';
+const AUTH_EXPIRY = 30 * 60 * 1000; // 30 minutes
+
 class AdminPanel {
     constructor() {
         this.tracker = new ChessTracker();
+        this.authenticated = false;
+        this.checkAuthentication();
+    }
+
+    checkAuthentication() {
+        const authData = sessionStorage.getItem(AUTH_KEY);
+        if (authData) {
+            const { timestamp } = JSON.parse(authData);
+            if (Date.now() - timestamp < AUTH_EXPIRY) {
+                this.authenticated = true;
+                this.showAdminPanel();
+            } else {
+                sessionStorage.removeItem(AUTH_KEY);
+                this.showPinScreen();
+            }
+        } else {
+            this.showPinScreen();
+        }
+    }
+
+    showPinScreen() {
+        document.getElementById('pin-overlay').style.display = 'flex';
+        document.getElementById('admin-container').style.display = 'none';
+        
+        document.getElementById('pin-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.validatePin();
+        });
+        
+        // Focus on PIN input
+        document.getElementById('pin-input').focus();
+    }
+
+    validatePin() {
+        const pinInput = document.getElementById('pin-input');
+        const pinError = document.getElementById('pin-error');
+        
+        if (pinInput.value === ADMIN_PIN) {
+            // Store authentication
+            sessionStorage.setItem(AUTH_KEY, JSON.stringify({
+                timestamp: Date.now()
+            }));
+            this.authenticated = true;
+            this.showAdminPanel();
+        } else {
+            pinError.textContent = 'Invalid PIN. Please try again.';
+            pinInput.value = '';
+            pinInput.focus();
+            
+            // Clear error after 3 seconds
+            setTimeout(() => {
+                pinError.textContent = '';
+            }, 3000);
+        }
+    }
+
+    showAdminPanel() {
+        document.getElementById('pin-overlay').style.display = 'none';
+        document.getElementById('admin-container').style.display = 'block';
+        
         this.initializeEventListeners();
         this.updateAdminStats();
         this.displayAllGames();
     }
 
     initializeEventListeners() {
+        if (!this.authenticated) return;
         // Form submission
         document.getElementById('game-form').addEventListener('submit', (e) => {
             e.preventDefault();
@@ -24,6 +89,13 @@ class AdminPanel {
             if (confirm('Are you sure you want to delete all game data? This action cannot be undone!')) {
                 this.clearAllData();
             }
+        });
+
+        // Logout button
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            sessionStorage.removeItem(AUTH_KEY);
+            this.authenticated = false;
+            this.showPinScreen();
         });
 
         // Set today's date as default

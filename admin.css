@@ -1,6 +1,12 @@
-.back-btn {
-    display: inline-block;
+.header-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
     margin-top: 15px;
+}
+
+.back-btn, #logout-btn {
+    display: inline-block;
     padding: 12px 25px;
     background: linear-gradient(145deg, #222 0%, #000 100%);
     color: #fff;
@@ -10,9 +16,12 @@
     border: 3px solid #000;
     transition: all 0.3s ease;
     box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 1em;
 }
 
-.back-btn:hover {
+.back-btn:hover, #logout-btn:hover {
     background: linear-gradient(145deg, #fff 0%, #e8e8e8 100%);
     color: #000;
     transform: translate(-3px, -3px);
@@ -299,7 +308,129 @@
     text-transform: uppercase;
 }
 
+/* PIN Entry Styles */
+.pin-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.pin-container {
+    background: linear-gradient(145deg, #fff 0%, #f0f0f0 100%);
+    border: 3px solid #000;
+    padding: 50px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+    min-width: 400px;
+}
+
+.pin-container::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: -8px;
+    bottom: -8px;
+    background: #000;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.pin-container h2 {
+    font-size: 1.8em;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    font-weight: 900;
+}
+
+.pin-container p {
+    color: #666;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+#pin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#pin-input {
+    padding: 15px;
+    font-size: 1.5em;
+    text-align: center;
+    letter-spacing: 8px;
+    border: 3px solid #000;
+    background: #fff;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#pin-input:focus {
+    outline: none;
+    background: #f8f8f8;
+    transform: scale(1.02);
+}
+
+#pin-form button {
+    padding: 15px 40px;
+    background: linear-gradient(145deg, #222 0%, #000 100%);
+    color: #fff;
+    border: 3px solid #000;
+    font-weight: 900;
+    letter-spacing: 2px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Courier New', monospace;
+}
+
+#pin-form button:hover {
+    background: linear-gradient(145deg, #fff 0%, #e8e8e8 100%);
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.pin-error {
+    color: #d00;
+    font-weight: bold;
+    letter-spacing: 1px;
+    min-height: 20px;
+}
+
+.pin-back {
+    display: inline-block;
+    margin-top: 20px;
+    color: #666;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.pin-back:hover {
+    color: #000;
+}
+
 @media (max-width: 768px) {
+    .pin-container {
+        min-width: 90%;
+        padding: 30px 20px;
+    }
+    
+    .header-actions {
+        flex-direction: column;
+    }
     .admin-content {
         grid-template-columns: 1fr;
     }

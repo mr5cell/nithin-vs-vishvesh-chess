@@ -10,10 +10,27 @@
 </head>
 <body>
     <div class="chessboard-bg"></div>
-    <div class="container">
+    
+    <div class="pin-overlay" id="pin-overlay">
+        <div class="pin-container">
+            <h2>ADMIN ACCESS</h2>
+            <p>Enter PIN to continue</p>
+            <form id="pin-form">
+                <input type="password" id="pin-input" maxlength="8" placeholder="••••••••" autocomplete="off">
+                <button type="submit">ENTER</button>
+                <div id="pin-error" class="pin-error"></div>
+            </form>
+            <a href="index.html" class="pin-back">← BACK TO DASHBOARD</a>
+        </div>
+    </div>
+    
+    <div class="container" id="admin-container" style="display: none;">
         <header>
             <h1>ADMIN PANEL</h1>
-            <a href="index.html" class="back-btn">← BACK TO DASHBOARD</a>
+            <div class="header-actions">
+                <a href="index.html" class="back-btn">← BACK TO DASHBOARD</a>
+                <button id="logout-btn" class="back-btn">LOGOUT</button>
+            </div>
         </header>
 
         <div class="admin-content">
