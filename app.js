@@ -118,22 +118,20 @@ function updateRecentGames() {
     const recentGames = tracker.getRecentGames();
     
     if (recentGames.length === 0) {
-        gamesList.innerHTML = '<div class="no-games">No games played yet!</div>';
+        gamesList.innerHTML = '<div class="no-games">NO GAMES PLAYED YET</div>';
         return;
     }
     
     gamesList.innerHTML = recentGames.map(game => {
         const date = new Date(game.date).toLocaleDateString();
-        const winnerEmoji = game.winner === 'nithin' ? '👨‍💻' : 
-                           game.winner === 'vishvesh' ? '👨‍🎓' : '🤝';
-        const winnerName = game.winner === 'draw' ? 'Draw' : 
-                          game.winner.charAt(0).toUpperCase() + game.winner.slice(1);
+        const winnerName = game.winner === 'draw' ? 'DRAW' : 
+                          game.winner.toUpperCase();
         const winnerClass = game.winner === 'draw' ? 'draw' : game.winner;
         
         return `
             <div class="game-item ${winnerClass}">
-                <span class="game-date">${date} - Game #${game.gameNumber}</span>
-                <span class="game-winner">${winnerEmoji} ${winnerName}</span>
+                <span class="game-date">${date} - GAME #${game.gameNumber}</span>
+                <span class="game-winner">${winnerName}</span>
             </div>
         `;
     }).join('');
@@ -156,16 +154,16 @@ function updateCharts() {
         data: {
             labels: performanceData.labels,
             datasets: [{
-                label: 'Nithin',
+                label: 'NITHIN',
                 data: performanceData.nithin,
-                borderColor: '#4CAF50',
-                backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                borderColor: '#000',
+                backgroundColor: 'rgba(0, 0, 0, 0.1)',
                 tension: 0.1
             }, {
-                label: 'Vishvesh',
+                label: 'VISHVESH',
                 data: performanceData.vishvesh,
-                borderColor: '#2196F3',
-                backgroundColor: 'rgba(33, 150, 243, 0.1)',
+                borderColor: '#666',
+                backgroundColor: 'rgba(102, 102, 102, 0.1)',
                 tension: 0.1
             }]
         },
@@ -200,14 +198,15 @@ function updateCharts() {
     window.pieChart = new Chart(pieCtx, {
         type: 'doughnut',
         data: {
-            labels: ['Nithin', 'Vishvesh', 'Draws'],
+            labels: ['NITHIN', 'VISHVESH', 'DRAWS'],
             datasets: [{
                 data: [stats.nithin, stats.vishvesh, stats.draws],
                 backgroundColor: [
-                    '#4CAF50',
-                    '#2196F3',
-                    '#FFC107'
+                    '#000',
+                    '#666',
+                    '#ccc'
                 ],
+                borderColor: '#000',
                 borderWidth: 2
             }]
         },

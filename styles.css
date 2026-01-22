@@ -5,132 +5,165 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Courier New', monospace;
+    background: #f0f0f0;
     min-height: 100vh;
-    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.chessboard-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(45deg, #000 25%, transparent 25%),
+        linear-gradient(-45deg, #000 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #000 75%),
+        linear-gradient(-45deg, transparent 75%, #000 75%);
+    background-size: 40px 40px;
+    background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+    opacity: 0.03;
+    z-index: -1;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 40px 20px;
 }
 
 header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
+    border-bottom: 3px solid #000;
+    padding-bottom: 20px;
 }
 
 header h1 {
-    font-size: 3em;
-    color: #333;
+    font-size: 2.5em;
+    letter-spacing: 8px;
+    font-weight: 900;
+    color: #000;
     margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.vs-text {
+    background: #000;
+    color: #fff;
+    padding: 0 15px;
+    margin: 0 10px;
 }
 
 .subtitle {
+    letter-spacing: 4px;
     color: #666;
-    font-size: 1.2em;
+    font-size: 0.9em;
+    margin-top: 10px;
 }
 
 .score-board {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 40px;
-    gap: 30px;
+    margin-bottom: 60px;
+    gap: 40px;
 }
 
 .player-card {
-    background: white;
-    border-radius: 15px;
+    background: #fff;
+    border: 3px solid #000;
     padding: 30px;
     text-align: center;
     flex: 1;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
 }
 
-.player-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-}
-
-.player-card.nithin {
-    border: 3px solid #4CAF50;
-}
-
-.player-card.vishvesh {
-    border: 3px solid #2196F3;
+.player-card::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: -5px;
+    bottom: -5px;
+    background: #000;
+    z-index: -1;
 }
 
 .player-avatar {
-    font-size: 3em;
-    margin-bottom: 10px;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+    border: 3px solid #000;
+    overflow: hidden;
+    filter: grayscale(100%);
+}
+
+.player-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .player-card h2 {
-    color: #333;
-    margin-bottom: 15px;
     font-size: 1.5em;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    font-weight: 900;
 }
 
 .score {
-    font-size: 3em;
-    font-weight: bold;
+    font-size: 4em;
+    font-weight: 900;
     margin-bottom: 5px;
 }
 
-.player-card.nithin .score {
-    color: #4CAF50;
-}
-
-.player-card.vishvesh .score {
-    color: #2196F3;
-}
-
 .wins-label {
+    letter-spacing: 2px;
+    font-size: 0.9em;
     color: #666;
-    font-size: 1.1em;
 }
 
 .vs-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
 }
 
 .vs {
-    font-size: 2em;
-    font-weight: bold;
-    color: #ff6b6b;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 2.5em;
+    font-weight: 900;
+    background: #000;
+    color: #fff;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
 }
 
-.total-games, .draw-count {
-    text-align: center;
-    background: white;
-    padding: 15px 20px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+.stat-box {
+    background: #fff;
+    border: 2px solid #000;
+    padding: 15px 25px;
+    min-width: 120px;
 }
 
-.total-games span, .draw-count span {
+.stat-box span {
     display: block;
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #333;
+    font-size: 2em;
+    font-weight: 900;
+    margin-bottom: 5px;
 }
 
-.total-games div, .draw-count div {
+.stat-box div {
+    font-size: 0.8em;
+    letter-spacing: 1px;
     color: #666;
-    font-size: 0.9em;
-    margin-top: 5px;
 }
 
 .stats-section {
@@ -138,17 +171,30 @@ header h1 {
 }
 
 .win-rate {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
+    background: #fff;
+    border: 3px solid #000;
+    padding: 30px;
     margin-bottom: 30px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
-.win-rate h3 {
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 1.4em;
+.win-rate::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: -5px;
+    bottom: -5px;
+    background: #000;
+    z-index: -1;
+}
+
+.win-rate h3, .recent-games h3 {
+    font-size: 1.3em;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    font-weight: 900;
+    text-transform: uppercase;
 }
 
 .rate-bar {
@@ -156,40 +202,33 @@ header h1 {
 }
 
 .bar-label {
-    color: #666;
+    font-weight: 700;
+    letter-spacing: 1px;
     margin-bottom: 8px;
-    font-weight: 500;
+    font-size: 0.9em;
 }
 
 .bar-container {
     display: flex;
     align-items: center;
-    background: #f5f5f5;
-    border-radius: 20px;
-    overflow: hidden;
-    height: 30px;
+    background: #f0f0f0;
+    border: 2px solid #000;
+    height: 35px;
     position: relative;
 }
 
 .bar {
     height: 100%;
+    background: #000;
     transition: width 0.5s ease;
-    border-radius: 20px;
-}
-
-.nithin-bar {
-    background: linear-gradient(90deg, #4CAF50, #66BB6A);
-}
-
-.vishvesh-bar {
-    background: linear-gradient(90deg, #2196F3, #42A5F5);
 }
 
 .rate-text {
     position: absolute;
     right: 10px;
-    color: #333;
-    font-weight: bold;
+    font-weight: 900;
+    background: #fff;
+    padding: 2px 8px;
 }
 
 .charts {
@@ -200,16 +239,29 @@ header h1 {
 }
 
 .chart-container {
-    background: white;
+    background: #fff;
+    border: 3px solid #000;
     padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.chart-container::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: -5px;
+    bottom: -5px;
+    background: #000;
+    z-index: -1;
 }
 
 .chart-container h3 {
-    color: #333;
+    font-size: 1.1em;
+    letter-spacing: 1px;
     margin-bottom: 20px;
-    font-size: 1.2em;
+    font-weight: 900;
+    text-transform: uppercase;
 }
 
 .chart-container canvas {
@@ -217,17 +269,22 @@ header h1 {
 }
 
 .recent-games {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
+    background: #fff;
+    border: 3px solid #000;
+    padding: 30px;
     margin-bottom: 30px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
-.recent-games h3 {
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 1.4em;
+.recent-games::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: -5px;
+    bottom: -5px;
+    background: #000;
+    z-index: -1;
 }
 
 .games-list {
@@ -240,8 +297,9 @@ header h1 {
     justify-content: space-between;
     padding: 15px;
     margin-bottom: 10px;
-    border-radius: 10px;
-    background: #f8f9fa;
+    border: 2px solid #000;
+    background: #fff;
+    font-weight: 700;
     transition: transform 0.2s ease;
 }
 
@@ -250,27 +308,26 @@ header h1 {
 }
 
 .game-item.nithin {
-    border-left: 4px solid #4CAF50;
-    background: linear-gradient(90deg, rgba(76, 175, 80, 0.1), transparent);
+    border-left: 8px solid #000;
 }
 
 .game-item.vishvesh {
-    border-left: 4px solid #2196F3;
-    background: linear-gradient(90deg, rgba(33, 150, 243, 0.1), transparent);
+    border-right: 8px solid #000;
 }
 
 .game-item.draw {
-    border-left: 4px solid #FFC107;
-    background: linear-gradient(90deg, rgba(255, 193, 7, 0.1), transparent);
+    border-top: 4px solid #000;
+    border-bottom: 4px solid #000;
 }
 
 .game-date {
-    color: #666;
+    font-size: 0.9em;
+    letter-spacing: 1px;
 }
 
 .game-winner {
-    font-weight: bold;
-    color: #333;
+    font-weight: 900;
+    letter-spacing: 1px;
 }
 
 .no-games {
@@ -278,31 +335,58 @@ header h1 {
     color: #999;
     padding: 40px;
     font-size: 1.1em;
+    letter-spacing: 1px;
 }
 
 .admin-link {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 40px;
 }
 
 .admin-btn {
     display: inline-block;
-    padding: 12px 30px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
+    padding: 15px 40px;
+    background: #000;
+    color: #fff;
     text-decoration: none;
-    border-radius: 25px;
-    font-weight: bold;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-weight: 900;
+    letter-spacing: 2px;
+    border: 3px solid #000;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 .admin-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background: #fff;
+    color: #000;
+    transform: translate(-3px, -3px);
+    box-shadow: 3px 3px 0 #000;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border: 1px solid #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #000;
+    border: 1px solid #fff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #333;
 }
 
 @media (max-width: 768px) {
+    header h1 {
+        font-size: 1.5em;
+        letter-spacing: 4px;
+    }
+    
     .score-board {
         flex-direction: column;
     }
@@ -318,11 +402,12 @@ header h1 {
         grid-template-columns: 1fr;
     }
     
-    header h1 {
-        font-size: 2em;
-    }
-    
     .player-card {
         width: 100%;
+    }
+    
+    .player-avatar {
+        width: 120px;
+        height: 120px;
     }
 }

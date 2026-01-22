@@ -97,7 +97,7 @@ class AdminPanel {
                         <span class="game-winner">${winnerName}</span>
                     </div>
                     <button class="delete-btn" onclick="adminPanel.deleteGame(${game.id})">
-                        🗑️ Delete
+                        DELETE
                     </button>
                 </div>
             `;
