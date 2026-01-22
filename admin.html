@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Chess Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔐 Admin Panel</h1>
+            <a href="index.html" class="back-btn">← Back to Dashboard</a>
+        </header>
+
+        <div class="admin-content">
+            <div class="add-game-section">
+                <h2>Add New Game Result</h2>
+                <form id="game-form">
+                    <div class="form-group">
+                        <label for="game-date">Game Date:</label>
+                        <input type="date" id="game-date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="game-number">Game Number (on this date):</label>
+                        <input type="number" id="game-number" min="1" value="1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="winner">Winner:</label>
+                        <select id="winner" required>
+                            <option value="">Select Winner</option>
+                            <option value="nithin">Nithin</option>
+                            <option value="vishvesh">Vishvesh</option>
+                            <option value="draw">Draw</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Add Game Result</button>
+                </form>
+                
+                <div id="message" class="message"></div>
+            </div>
+
+            <div class="games-management">
+                <h2>Manage Games</h2>
+                <div class="stats-summary">
+                    <div class="stat-box">
+                        <span class="stat-label">Total Games:</span>
+                        <span class="stat-value" id="admin-total-games">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Nithin Wins:</span>
+                        <span class="stat-value" id="admin-nithin-wins">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Vishvesh Wins:</span>
+                        <span class="stat-value" id="admin-vishvesh-wins">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Draws:</span>
+                        <span class="stat-value" id="admin-draws">0</span>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button id="export-btn" class="action-btn">📥 Export Data</button>
+                    <button id="clear-btn" class="action-btn danger">🗑️ Clear All Data</button>
+                </div>
+
+                <h3>All Games</h3>
+                <div id="admin-games-list" class="admin-games-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
