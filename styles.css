@@ -195,6 +195,7 @@ header h1 {
     margin-bottom: 25px;
     font-weight: 900;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .rate-bar {
@@ -262,6 +263,7 @@ header h1 {
     margin-bottom: 20px;
     font-weight: 900;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .chart-container canvas {
